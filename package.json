@@ -1,0 +1,29 @@
+{
+  "name": "api-rest",
+  "version": "1.0.0",
+  "description": "Exercício realizado para o Processo Escriba",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "mocha --exit --recursive",
+    "lint": "eslint ."
+  },
+  "keywords": [],
+  "author": "Pedro Bittencourt",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.10",
+    "eslint": "^8.54.0",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.0.1"
+  }
+}
