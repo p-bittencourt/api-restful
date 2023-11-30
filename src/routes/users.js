@@ -97,6 +97,34 @@ router.post('/signin', async(req, res) => {
     }
 })
 
+router.get('/search', (req, res) => {
+    const token = req.headers.authorization;
+
+    if (!token) {
+        return res.status(401).json({ mensagem: 'Não autorizado' });
+    }
+
+    try {
+        const decoded = jwt.verify(token.replace('Bearer ', ''), process.env.JWT_SECRET);
+        const users = getUsers();
+        const user = users.find(u => u.id === decoded.id);
+
+        if (user) {
+            user.ultimo_login = new Date().toISOString();
+            saveUsers(users);
+
+            res.json(user);
+        } else {
+            res.status(404).json({ mensagem: 'Usuário não encontrado' });
+        }
+    } catch (error) {
+        if (error.name === 'TokenExpiredError') {
+            return res.status(401).json({ mensagem: 'Sessão inválida' });
+        }
+        return res.status(401).json({ mensagem: 'Não autorizado' });
+    }
+});
+
 function getUsers(){
     try {
         const usersData = fs.readFileSync(usersFilePath)
