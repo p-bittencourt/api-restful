@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
+router.post('/signup', async (req, res) => {
     try {
         const users = getUsers()
 

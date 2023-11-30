@@ -14,18 +14,16 @@ describe("Endpoint de registro do usuário", () => {
             telefones: [{ numero: '123456789', ddd: '11'}],
         }
 
-        chai.request(app)
+        const res = await chai.request(app)
             .post('/signup')
             .send(newUser)
-            .end((err, res) => {
-                expect(res).to.have.status(201)
-                expect(res.body).to.be.an('object')
-                expect(res.body).to.have.property('id')
-                expect(res.body).to.have.property('data_criacao')
-                expect(res.body).to.have.property('data_atualizacao')
-                expect(res.body).to.have.property('ultimo_login')
-                expect(res.body).to.have.property('token')
-                done
-            })
+            
+        expect(res).to.have.status(201)
+        expect(res.body).to.be.an('object')
+        expect(res.body).to.have.property('id')
+        expect(res.body).to.have.property('data_criacao')
+        expect(res.body).to.have.property('data_atualizacao')
+        expect(res.body).to.have.property('ultimo_login')
+        expect(res.body).to.have.property('token')
     })
 })
