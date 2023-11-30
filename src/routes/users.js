@@ -64,6 +64,39 @@ router.post('/signup', async (req, res) => {
     }
 })
 
+router.post('/signin', async(req, res) => {
+    try {
+        const users = getUsers()
+
+        const user = users.find((u) => u.email === req.body.email)
+
+        if (!user){
+            return res.status(401).json({mensagem: "Usuário não encontrado"})
+        }
+
+        const verificarSenha = await bcrypt.compare(req.body.senha, user.senha)
+        if (!verificarSenha) {
+            return res.status(401).json({mensagem: "Senha incorreta."})
+        }
+
+        user.ultimo_login = new Date().toISOString()
+        saveUsers(users)
+
+        const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: '1h'})
+
+        res.status(200).json({
+            id: user.id,
+            data_criacao: user.data_atualizacao,
+            data_atualizacao: user.data_atualizacao,
+            ultimo_login: user.ultimo_login,
+            token,
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({mensagem: "Erro interno do servidor."})
+    }
+})
+
 function getUsers(){
     try {
         const usersData = fs.readFileSync(usersFilePath)
