@@ -27,6 +27,13 @@ router.get('/:id', (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const users = getUsers()
+
+        // Verificar se o email já está cadastrado
+        const existingUser = users.find((user) => user.email === req.body.email)
+        if (existingUser) {
+            return res.status(400).json({mensagem: 'Email já cadastrado'})
+        }
+
         const senhaHased = await bcrypt.hash(req.body.senha, 10)
 
         const newUser = {

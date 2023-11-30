@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": "074f1cec-efbd-402e-8f86-fd92f5d79ff9",
+    "nome": "Pedro",
+    "email": "pedro@email.com",
+    "senha": "$2b$10$qfmiJ.p8WsXhCBZq42QQAulpV0hz0p03DSonUy9T3wp2WW9Dyt9ZS",
+    "telefones": [
+      {
+        "numero": "123456789",
+        "ddd": "11"
+      }
+    ],
+    "data_criacao": "2023-11-30T13:26:57.774Z",
+    "data_atualizacao": "2023-11-30T13:26:57.774Z",
+    "ultimo_login": "2023-11-30T13:26:57.774Z"
+  }
+]

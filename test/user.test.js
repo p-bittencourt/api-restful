@@ -15,7 +15,7 @@ describe("Endpoint de registro do usuário", () => {
         }
 
         chai.request(app)
-            .post('/users')
+            .post('/signup')
             .send(newUser)
             .end((err, res) => {
                 expect(res).to.have.status(201)
