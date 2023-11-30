@@ -9,14 +9,14 @@ const PORT = process.env.PORT || 3000
 
 app.use(bodyParser.json())
 
-app.use('/users', usersRouter)
+app.use('/signup', usersRouter)
 
 app.use((req, res) => {
     res.status(404).json({ mensagem: 'Endpoint não encontrado.'})
 })
 
 app.listen(PORT, () => {
-    console.log(`Servidor executando em https://localhost:${PORT}`)
+    console.log(`Servidor executando em http://localhost:${PORT}`)
 })
 
 module.exports = app
