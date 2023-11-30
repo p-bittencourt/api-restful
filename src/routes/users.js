@@ -3,6 +3,7 @@ const router = express.Router()
 const fs = require('fs')
 const { v4: uuidv4 } = require('uuid')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const usersFilePath = './data/users.json'
 
@@ -31,13 +32,23 @@ router.post('/', async (req, res) => {
             id: uuidv4(),
             nome: req.body.nome,
             email: req.body.email,
-            senha: senhaHased
+            senha: senhaHased,
+            telefones: req.body.telefones || [],
+            data_criacao: new Date().toISOString(),
+            data_atualizacao: new Date().toISOString(),
+            ultimo_login: new Date().toISOString(),
         }
 
         users.push(newUser)
         saveUsers(users)
 
-        res.status(201).json(newUser)
+        const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, { expiresIn: '1h'})
+        res.status(201).json({ 
+            id: newUser.id,
+            data_criacao: newUser.data_criacao,
+            data_atualizacao: newUser.data_atualizacao,
+            token
+         })
     } catch (error) {
         console.error(error)
         res.status(500).json({mensagem: 'Erro interno do servidor.'})
