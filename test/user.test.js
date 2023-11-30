@@ -27,3 +27,24 @@ describe("Endpoint de registro do usuário", () => {
         expect(res.body).to.have.property('token')
     })
 })
+
+describe("Endpoint de login do usuário", () => {
+    it("deveria realizar o login e retornar a resposta no formato correto", async() => {
+        const credentials = {
+            email: 'fulano@email.com',
+            senha: 'senha1234'
+        }
+
+        const res = await chai.request(app)
+            .post('/signin')
+            .send(credentials)
+        
+        expect(res).to.have.status(200)
+        expect(res.body).to.be.an('object')
+        expect(res.body).to.have.property('id')
+        expect(res.body).to.have.property('data_criacao')
+        expect(res.body).to.have.property('data_atualizacao')
+        expect(res.body).to.have.property('ultimo_login')
+        expect(res.body).to.have.property('token')
+    })
+})
