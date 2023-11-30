@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/app.js",
+    "startProd": "NODE_ENV=production node src/app.js",
     "dev": "nodemon src/app.js",
     "test": "mocha --exit --recursive",
     "lint": "eslint ."

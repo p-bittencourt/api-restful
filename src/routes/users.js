@@ -12,10 +12,9 @@ const path = require('path')
 
 // Configurando o local do arquivo .json
 const usersFilePath = path.join(__dirname, '../data/users.json')
-// Fazer o Get de todos os usuários
+// Exibe mensagem na tela '/'
 router.get('/', (req, res) => {
-    const users = getUsers()
-    res.json(users)
+    res.send("Bem vindo à API desenvolvida por Pedro Bittencourt")
 })
 // Buscar o usuário por ID
 router.get('/:id', (req, res) => {

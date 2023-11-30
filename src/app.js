@@ -20,6 +20,11 @@ app.use(usersRouter)
 app.use((req, res) => {
     res.status(404).json({ mensagem: 'Endpoint não encontrado.'})
 })
+// Lidando com erros internos e logando no console;
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ mensagem: 'Erro interno do servidor.' });
+});
 // Iniciando o servidor na porta correta
 app.listen(PORT, () => {
     console.log(`Servidor executando em http://localhost:${PORT}`)
