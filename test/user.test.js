@@ -1,3 +1,5 @@
+// Arquivo para testes.
+// Se realizado duas vezes, não realizará o cadastro do Fulano, pois o email já estará no sistema, é necessário apagar primeiro.
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const app = require('../src/app.js')
