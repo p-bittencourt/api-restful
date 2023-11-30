@@ -18,3 +18,5 @@ app.use((req, res) => {
 app.listen(PORT, () => {
     console.log(`Servidor executando em https://localhost:${PORT}`)
 })
+
+module.exports = app

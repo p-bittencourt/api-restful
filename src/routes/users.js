@@ -4,8 +4,9 @@ const fs = require('fs')
 const { v4: uuidv4 } = require('uuid')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const path = require('path')
 
-const usersFilePath = './data/users.json'
+const usersFilePath = path.join(__dirname, '../data/users.json')
 
 router.get('/', (req, res) => {
     const users = getUsers()
@@ -47,6 +48,7 @@ router.post('/', async (req, res) => {
             id: newUser.id,
             data_criacao: newUser.data_criacao,
             data_atualizacao: newUser.data_atualizacao,
+            ultimo_login: newUser.ultimo_login,
             token
          })
     } catch (error) {
